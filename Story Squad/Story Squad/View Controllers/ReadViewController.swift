@@ -18,7 +18,7 @@ class ReadViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupPDFView()
         loadPDF()
         setupDots()
@@ -46,6 +46,14 @@ class ReadViewController: UIViewController {
         self.pageControl.currentPage = 0
         self.pageControl.currentPageTintColor = UIColor(red: 1, green: 0.427, blue: 0.227, alpha: 1)
         self.pageControl.inactiveTintColor = UIColor(red: 0, green: 0.447, blue: 0.733, alpha: 1)
+        var currentPage = 0 {
+            didSet {
+                guard totalPages! > currentPage else {
+                    return
+                }
+                
+            }
+        }
     }
     
     func setupDotLayersScale() {
