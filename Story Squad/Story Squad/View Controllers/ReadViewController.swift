@@ -21,11 +21,10 @@ class ReadViewController: UIViewController {
         
         setupPDFView()
         loadPDF()
-        let totalPages = pdfView.document?.pageCount
-        pageControl.numberOfPages = totalPages!
-        self.pageControl.currentPage = 0
-        self.pageControl.currentPageTintColor = UIColor(red: 1, green: 0.427, blue: 0.227, alpha: 1)
-        self.pageControl.inactiveTintColor = UIColor(red: 0, green: 0.447, blue: 0.733, alpha: 1)
+        setupDots()
+        setupDotLayersScale()
+        
+        
     }
 
     func setupPDFView() {
@@ -41,6 +40,42 @@ class ReadViewController: UIViewController {
         pdfView.document = PDFDocument(url: path)
     }
     
+    func setupDots() {
+        let totalPages = pdfView.document?.pageCount
+        self.pageControl.numberOfPages = totalPages!
+        self.pageControl.currentPage = 0
+        self.pageControl.currentPageTintColor = UIColor(red: 1, green: 0.427, blue: 0.227, alpha: 1)
+        self.pageControl.inactiveTintColor = UIColor(red: 0, green: 0.447, blue: 0.733, alpha: 1)
+    }
+    
+    func setupDotLayersScale() {
+        let limit = 5
+         var fullScaleIndex = [0, 1, 2]
+         var dotLayers: [CALayer] = []
+         var centerIndex: Int { return fullScaleIndex[1] }
+        
+        dotLayers.enumerated().forEach {
+            guard let first = fullScaleIndex.first, let last = fullScaleIndex.last else {
+                return
+            }
+
+            var transform = CGAffineTransform.identity
+            if !fullScaleIndex.contains($0.offset) {
+                var scaleValue: CGFloat = 0
+                if abs($0.offset - first) == 1 || abs($0.offset - last) == 1 {
+                    scaleValue = pageControl.middleScaleValue
+                } else if abs($0.offset - first) == 2 || abs($0.offset - last) == 2 {
+                    scaleValue = pageControl.minScaleValue
+                } else {
+                    scaleValue = 0
+                }
+                transform = transform.scaledBy(x: scaleValue, y: scaleValue)
+            }
+
+            $0.element.setAffineTransform(transform)
+        }
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -51,4 +86,11 @@ class ReadViewController: UIViewController {
     }
     */
 
+}
+extension ReadViewController: UIScrollViewDelegate {
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
+        pageControl.currentPage = Int(pageNumber)
+    }
 }
