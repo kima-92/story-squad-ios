@@ -59,6 +59,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.5.2):
     - GoogleUtilities/Logger
+  - ISPageControl (0.1.0)
   - nanopb (0.3.9011):
     - nanopb/decode (= 0.3.9011)
     - nanopb/encode (= 0.3.9011)
@@ -70,6 +71,7 @@ PODS:
 
 DEPENDENCIES:
   - Firebase/Analytics
+  - ISPageControl
   - ScalingCarousel
   - SwiftLint
 
@@ -85,6 +87,7 @@ SPEC REPOS:
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
     - GoogleUtilities
+    - ISPageControl
     - nanopb
     - PromisesObjC
     - ScalingCarousel
@@ -101,11 +104,12 @@ SPEC CHECKSUMS:
   GoogleDataTransport: a857c6a002d201b524dd4bc2ed7e7355ed07e785
   GoogleDataTransportCCTSupport: 32f75fbe904c82772fcbb6b6bd4525bfb6f2a862
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
+  ISPageControl: cadeb38e9ecdf05540c69ea1132612521b3caa2a
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   ScalingCarousel: 7bf711d154b0c5c362c5dd4787ed7d13b489a4cb
   SwiftLint: 55e96a4a4d537d4a3156859fc1c54bd24851a046
 
-PODFILE CHECKSUM: afb80a0a755c7e228e21ff793923922825054e4f
+PODFILE CHECKSUM: 8520379ef66c5fb5e92a805e2291d323a21bb794
 
 COCOAPODS: 1.9.1

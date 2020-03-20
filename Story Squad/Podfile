@@ -9,9 +9,7 @@ target 'Story Squad' do
 
 	pod 'SwiftLint'
 	pod "ScalingCarousel"
-
-  
- 
   	pod 'Firebase/Analytics'
+	pod 'ISPageControl'
 
 end

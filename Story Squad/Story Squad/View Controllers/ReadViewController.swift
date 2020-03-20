@@ -8,29 +8,24 @@
 
 import UIKit
 import PDFKit
+import ISPageControl
 
 class ReadViewController: UIViewController {
 
     @IBOutlet weak var pdfView: PDFView!
     
-    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var pageControl: ISPageControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupPDFView()
         loadPDF()
-
         let totalPages = pdfView.document?.pageCount
+        pageControl.numberOfPages = totalPages!
         self.pageControl.currentPage = 0
-        let dotsCount = 5
-        if totalPages! < dotsCount {
-        self.pageControl.numberOfPages = totalPages!
-            } else {
-        self.pageControl.numberOfPages = dotsCount
-            }
-        self.pageControl.currentPageIndicatorTintColor = UIColor(red: 1, green: 0.427, blue: 0.227, alpha: 1)
-        
+        self.pageControl.currentPageTintColor = UIColor(red: 1, green: 0.427, blue: 0.227, alpha: 1)
+        self.pageControl.inactiveTintColor = UIColor(red: 0, green: 0.447, blue: 0.733, alpha: 1)
     }
 
     func setupPDFView() {
@@ -57,4 +52,3 @@ class ReadViewController: UIViewController {
     */
 
 }
-
