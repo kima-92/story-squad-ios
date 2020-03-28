@@ -14,21 +14,47 @@ class DrawViewController: UIViewController {
     var childUser: Child?
     
     var imagePicker: ImagePicker!
+    var lastPoint = CGPoint.zero
+    var color = UIColor.black
+    
+    var brushWidth: CGFloat = 10.0
+    var opacity: CGFloat = 1.0
+    var swiped = false
     
     @IBOutlet weak var promptLabel: UILabel!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var chooseFilesFromDeviceButton: UIButton!
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var selectedImage1Label: UILabel!
     @IBOutlet weak var selectAnImageLabel: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidLoad() {        super.viewDidLoad()
         
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         
         self.hideKeyboardWhenTappedAround()
     }
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         guard let navController = segue.destination as? UINavigationController,
+           let settingsController = navController.topViewController as? DrawSettingsViewController else {
+             return
+         }
+         settingsController.delegate = self
+         settingsController.brush = brushWidth
+         settingsController.opacity = opacity
+         
+         var red: CGFloat = 0
+         var green: CGFloat = 0
+         var blue: CGFloat = 0
+         color.getRed(&red, green: &green, blue: &blue, alpha: nil)
+         settingsController.red = red
+         settingsController.green = green
+         settingsController.blue = blue
+       }
+    
+    // MARK: - Actions
     
     @IBAction func submitButtonTapped(_ sender: Any) {
         submitDrawing()
@@ -46,7 +72,7 @@ class DrawViewController: UIViewController {
         submitButton.layer.borderWidth = 3.0
         submitButton.layer.cornerRadius = 10
     }
-    
+        
     func showDrawingSubmittedAlert() {
         
         let alert = UIAlertController(title: "Your Amazing Drawing has been Submitted!", message: "Thank you", preferredStyle: .alert)
@@ -91,6 +117,7 @@ class DrawViewController: UIViewController {
             //    }
         }
     }
+    
 }
 extension DrawViewController: ImagePickerDelegate {
     
@@ -98,4 +125,15 @@ extension DrawViewController: ImagePickerDelegate {
         let imageString = image?.description
         selectedImage1Label.text = imageString
     }
+}
+extension DrawViewController: DrawSettingsViewControllerDelegate {
+  func settingsViewControllerFinished(_ settingsViewController: DrawSettingsViewController) {
+    brushWidth = settingsViewController.brush
+    opacity = settingsViewController.opacity
+    color = UIColor(red: settingsViewController.red,
+                    green: settingsViewController.green,
+                    blue: settingsViewController.blue,
+                    alpha: opacity)
+    dismiss(animated: true)
+  }
 }

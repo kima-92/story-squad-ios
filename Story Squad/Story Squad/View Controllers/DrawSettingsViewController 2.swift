@@ -9,10 +9,10 @@
 import UIKit
 
 protocol DrawSettingsViewControllerDelegate: class {
-  func settingsViewControllerFinished(_ settingsViewController: DrawSettingsViewController)
+  func settingsViewControllerFinished(_ settingsViewController: SettingsViewController)
 }
 
-class DrawSettingsViewController: UIViewController {
+class SettingsViewController: UIViewController {
   
   @IBOutlet weak var sliderBrush: UISlider!
   @IBOutlet weak var sliderOpacity: UISlider!

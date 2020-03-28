@@ -152,7 +152,7 @@ class NetworkingController {
     //                    let dataString = String(data: data, encoding: .utf8)
     //                    print("response Parent data: \(String(describing: dataString))")
     //                    let parentRepresentation = try JSONDecoder().decode(ParentRepresentation.self, from: data)
-    ////                    self.parentUser?.parentRepresentation = parentRepresentation
+    //                    self.parentUser?.parentRepresentation = parentRepresentation
     //                    print("Parent Representation: \(parentRepresentation)")
     //
     //                    let bearer = try JSONDecoder().decode(Bearer.self, from: data)

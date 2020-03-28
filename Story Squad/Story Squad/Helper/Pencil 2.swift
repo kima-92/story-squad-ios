@@ -1,10 +1,4 @@
-//
-//  Pencil.swift
-//  Story Squad
-//
-//  Created by Jonalynn Masters on 3/28/20.
-//  Copyright © 2020 Lambda School. All rights reserved.
-//
+
 
 import Foundation
 import UIKit

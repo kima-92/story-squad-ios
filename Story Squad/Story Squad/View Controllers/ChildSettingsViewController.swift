@@ -53,7 +53,6 @@ class ChildSettingsViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
 
     // MARK: - Actions
     @IBAction func dyslexiaSliderToggled(_ sender: UISwitch) {
@@ -127,7 +126,6 @@ class ChildSettingsViewController: UIViewController {
 //
 //        networkingController?.deleteChildFromCoreData(child: childUser, context: <#T##NSManagedObjectContext#>)
 //    }
-    
     
     // MARK: - Private functions
     
